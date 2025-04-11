@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  section.fade-in
+
+    //- Skills Section
+    section.skills
+      .skills-grid
+        .skill
+          i.fab.fa-python
+        .skill
+          i.fab.fa-raspberry-pi
+        .skill
+          i.fab.fa-aws
+
+    if featured
+      section.fade-in
+        h2 Featured Projects
+        .featured.project
+          if featured.image
+            img.project-image(src=featured.image, alt=featured.title)
+          h3= featured.title
+          p= featured.description
+          a.button(href=featured.link, target= "blank") View Project
+
+    //- Home Intro Section (wrap image + text)
+    section.home-intro
+      img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
+      h2 Happy you landed here 🙌 Hi I'm Jasper
+      p This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
+
+      .home-buttons
+        a.button(href="/projects") View Projects
+        a.button(href="/resume") View Resume
+        a.button(href="/contact") Get in Touch

@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css")
+
+  body
+    canvas#bgCanvas
+
+    header
+      nav
+        ul
+          li: a.nav-link(href="/") Home
+          li: a.nav-link(href="/projects") Projects
+          li: a.nav-link(href="/resume") Resume
+          li: a.nav-link(href="/contact") Contact
+
+    main
+      block content
+
+    footer
+      p © 2025 Jasper
+    
+    div#background-layer
+    canvas#bgCanvas
+    script(src="/js/background.js")
+    script(src="/js/main.js")
