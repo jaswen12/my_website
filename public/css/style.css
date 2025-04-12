@@ -360,8 +360,7 @@ footer {
 
 /* === Perspective === */
 #barba-wrapper {
-  perspective: 1200px;
-  overflow-x: hidden;
+  perspective: 1500px;
 }
 
 .barba-container {
