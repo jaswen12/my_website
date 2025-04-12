@@ -359,25 +359,15 @@ footer {
 }
 
 /* === Transitions === */
-#transition-strips {
+#clip-transition {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
-  pointer-events: none;
-  z-index: 1000;
-  overflow: hidden;
-  display: none;
-}
-
-#transition-strips .strip {
-  position: absolute;
   height: 100%;
-  width: 5.2%; /* overlap to avoid subpixel gaps */
   background: #5c4432;
-  top: 0;
-  transform: translateX(-100%) translateZ(0); /* force GPU render */
-  backface-visibility: hidden;
-  will-change: transform;
+  z-index: 1000;
+  pointer-events: none;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: none;
 }

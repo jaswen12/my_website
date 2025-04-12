@@ -1,34 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const wrapper = document.getElementById("transition-strips");
-  const strips = Array.from(document.querySelectorAll("#transition-strips .strip"));
-  const totalWidth = window.innerWidth;
-  const stripCount = strips.length;
-  const stripWidth = totalWidth / stripCount;
+  const clip = document.getElementById("clip-transition");
 
-  // Set precise position and width
-  strips.forEach((strip, i) => {
-    strip.style.left = `${Math.floor(i * stripWidth)}px`;
-    strip.style.width = `${Math.ceil(stripWidth + 1)}px`; // slight overlap
-  });
+  function playClipTransition(callback) {
+    clip.style.display = "block";
+    gsap.set(clip, {
+      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
+    });
 
-  function playTransition(callback) {
-    wrapper.style.display = "block";
-    gsap.set(strips, { xPercent: -100 });
-
-    // Continuous high-frequency ripple
-    gsap.to(strips, {
-      xPercent: 150,
-      duration: 1.2,
-      ease: "circ.inOut",
-      stagger: {
-        each: 0.015,
-        from: "start"
-      },
+    const tl = gsap.timeline({
       onComplete: () => {
-        wrapper.style.display = "none";
-        gsap.set(strips, { xPercent: -100 });
         callback && callback();
+        gsap.to(clip, {
+          clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
+          duration: 0.8,
+          ease: "power2.inOut",
+          onComplete: () => {
+            clip.style.display = "none";
+          }
+        });
       }
+    });
+
+    tl.to(clip, {
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      duration: 0.8,
+      ease: "power2.inOut"
     });
   }
 
@@ -36,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", e => {
       e.preventDefault();
       const target = link.getAttribute("href");
-      playTransition(() => {
+      playClipTransition(() => {
         window.location.href = target;
       });
     });
