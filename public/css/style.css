@@ -368,6 +368,9 @@ footer {
   z-index: 1000;
   pointer-events: none;
   background: #5c4432;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 #svg-ripple-mask svg {
