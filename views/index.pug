@@ -3,8 +3,8 @@ extends layout
 block content
   #barba-wrapper
     .barba-container(data-barba="container" data-barba-namespace="home")
-      section.fade-in
-
+      .home-wrapper
+        //- Featured Project Section
         if featured
           section.fade-in
             h2 Featured Projects
@@ -13,9 +13,9 @@ block content
                 img.project-image(src=featured.image, alt=featured.title)
               h3= featured.title
               p= featured.description
-              a.button(href=featured.link, target= "blank") View Project
+              a.button(href=featured.link, target="_blank") View Project
 
-        //- Home Intro Section (wrap image + text)
+        //- Home Intro Section
         section.home-intro
           img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
           h2 Happy you landed here 🙌 Hi I'm Jasper
