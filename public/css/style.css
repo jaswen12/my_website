@@ -358,12 +358,24 @@ footer {
   display: block;
 }
 
-/* === Perspective === */
-#barba-wrapper {
-  perspective: 1500px;
+/* === Transitions === */
+#transition-strips {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
 }
 
-.barba-container {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+#transition-strips .strip {
+  position: absolute;
+  width: 100%;
+  height: 25%;
+  background: #5c4432;
+  transform: translateY(-100%);
 }
+#transition-strips .strip:nth-child(2) { top: 25%; }
+#transition-strips .strip:nth-child(3) { top: 50%; }
+#transition-strips .strip:nth-child(4) { top: 75%; }

@@ -19,13 +19,19 @@ html
           li: a.nav-link(href="/contact") Contact
 
     main
-      #barba-wrapper
-        .barba-container(data-barba="container" data-barba-namespace=namespace)
-          block content
+      block content
 
     footer
       p © 2025 Jasper
 
-    script(src="https://unpkg.com/@barba/core")
+    // STRIP TRANSITION OVERLAY
+    #transition-strips
+      .strip
+      .strip
+      .strip
+      .strip
+
+    // SCRIPTS
     script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js")
-    script(src="/js/transition.js")
+    script(src="/js/fadeIn.js")
+    script(src="/js/strip-transition.js")
