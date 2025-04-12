@@ -374,8 +374,10 @@ footer {
 #transition-strips .strip {
   position: absolute;
   height: 100%;
-  width: 5%;
+  width: 5.2%; /* overlap to avoid subpixel gaps */
   background: #5c4432;
   top: 0;
-  transform: translateX(-100%);
+  transform: translateX(-100%) translateZ(0); /* force GPU render */
+  backface-visibility: hidden;
+  will-change: transform;
 }
