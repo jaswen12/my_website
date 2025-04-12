@@ -1,12 +1,9 @@
 extends layout
 
-- var namespace = "home";
-
 block content
-
-  //- Featured Project Section
-  if featured
-    section.fade-in
+  section.fade-in(data-barba="container" data-barba-namespace="home")
+    //- Featured Project Section
+    if featured
       h2 Featured Projects
       .featured.project
         if featured.image
@@ -15,13 +12,13 @@ block content
         p= featured.description
         a.button(href=featured.link, target="_blank") View Project
 
-  //- Home Intro Section
-  section.home-intro
-    img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
-    h2 Happy you landed here 🙌 Hi I'm Jasper
-    p This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
+    //- Home Intro Section
+    section.home-intro
+      img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
+      h2 Happy you landed here 🙌 Hi I'm Jasper
+      p This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
 
-    .home-buttons
-      a.button(href="/projects") View Projects
-      a.button(href="/resume") View Resume
-      a.button(href="/contact") Get in Touch
+      .home-buttons
+        a.button(href="/projects") View Projects
+        a.button(href="/resume") View Resume
+        a.button(href="/contact") Get in Touch
