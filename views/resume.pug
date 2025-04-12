@@ -2,7 +2,9 @@ extends layout
 
 block content
   - var namespace = "resume";
-  
+
   section.fade-in
+    h2 My Resume
+
     .resume-container
-      embed(src="/resume.pdf" type="application/pdf")
+      iframe(src="/resume.pdf", width="100%", height="800px")

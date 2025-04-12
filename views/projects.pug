@@ -11,16 +11,13 @@ block content
         .project
           if project.image
             img.project-image(src=project.image, alt=project.title)
-
           .project-content
             if project.iconClass
               i(class=project.iconClass)
             h3= project.title
             p= project.description
-
             if project.tags
               ul.tags
                 each tag in project.tags
                   li= tag
-
           a(href=project.link, target="_blank") View on GitHub
