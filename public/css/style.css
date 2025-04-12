@@ -363,8 +363,8 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 1000;
   overflow: hidden;
@@ -373,14 +373,9 @@ footer {
 
 #transition-strips .strip {
   position: absolute;
+  top: 0;
+  width: 5%;
   height: 100%;
-  width: 25%;
   background: #5c4432;
   transform: translateX(-100%);
-  top: 0;
 }
-
-#transition-strips .strip:nth-child(1) { left: 0%; }
-#transition-strips .strip:nth-child(2) { left: 25%; }
-#transition-strips .strip:nth-child(3) { left: 50%; }
-#transition-strips .strip:nth-child(4) { left: 75%; }

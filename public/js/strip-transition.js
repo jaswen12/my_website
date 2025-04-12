@@ -5,32 +5,32 @@ document.addEventListener("DOMContentLoaded", () => {
   function playTransition(callback) {
     wrapper.style.display = "block";
 
-    const tl = gsap.timeline({
+    // Animate strips in
+    gsap.to(strips, {
+      xPercent: 100,
+      duration: 0.6,
+      ease: "power2.inOut",
+      stagger: 0.05,
       onComplete: () => {
         callback && callback();
+
+        // Animate strips out
         gsap.to(strips, {
-          xPercent: -100,
+          xPercent: 200,
           duration: 0.6,
           ease: "power2.inOut",
-          stagger: 0.1,
+          stagger: 0.05,
           onComplete: () => {
             wrapper.style.display = "none";
+            gsap.set(strips, { xPercent: -100 });
           }
         });
       }
     });
-
-    tl.set(strips, { xPercent: -100 });
-    tl.to(strips, {
-      xPercent: 0,
-      duration: 0.6,
-      ease: "power2.inOut",
-      stagger: 0.1
-    });
   }
 
-  const links = document.querySelectorAll("a.nav-link");
-  links.forEach(link => {
+  // Attach transition to navigation links
+  document.querySelectorAll("a.nav-link").forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
       const target = link.getAttribute("href");
