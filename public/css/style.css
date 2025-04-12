@@ -358,7 +358,7 @@ footer {
   display: block;
 }
 
-/* === svg === */
+/* === SVG Ripple using clipPath === */
 #svg-ripple-mask {
   position: fixed;
   top: 0;
@@ -368,6 +368,10 @@ footer {
   z-index: 1000;
   pointer-events: none;
   background: #5c4432;
-  mask: url(#ripple-mask);
-  -webkit-mask: url(#ripple-mask);
+}
+
+#svg-ripple-mask svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }

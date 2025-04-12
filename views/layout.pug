@@ -24,61 +24,14 @@ html
     footer
       p © 2025 Jasper
 
-    // SVG ripple mask overlay
+    // CLIP-PATH TRANSITION OVERLAY
     #svg-ripple-mask
-      svg#ripple-mask-svg(viewBox="0 0 100 100" preserveAspectRatio="none")
-        mask#ripple-mask
-          rect(width="100%" height="100%" fill="white")
-          rect.mask-rect(x="0", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="2", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="4", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="6", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="8", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="10", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="12", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="14", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="16", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="18", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="20", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="22", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="24", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="26", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="28", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="30", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="32", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="34", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="36", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="38", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="40", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="42", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="44", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="46", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="48", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="50", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="52", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="54", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="56", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="58", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="60", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="62", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="64", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="66", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="68", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="70", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="72", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="74", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="76", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="78", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="80", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="82", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="84", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="86", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="88", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="90", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="92", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="94", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="96", y="0", width="2", height="100", fill="black")
-        rect.mask-rect(x="98", y="0", width="2", height="100", fill="black")
+      svg#ripple-mask-svg(viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg")
+        defs
+          clipPath#ripple-clip
+            each val in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98]
+              rect(x=val, y="0", width="2", height="100")
+        rect(width="100%", height="100%", fill="black", clip-path="url(#ripple-clip)")
 
     // SCRIPTS
     script(src="/js/fadeIn.js")

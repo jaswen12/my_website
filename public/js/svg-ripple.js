@@ -1,45 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const strips = gsap.utils.toArray(".mask-rect");
-  const wrapper = document.getElementById("svg-ripple-mask");
+  const clipRects = document.querySelectorAll('#ripple-mask-svg clipPath rect');
 
   function playRipple(callback) {
-    wrapper.style.display = "block";
-    gsap.set(strips, { scaleY: 0, transformOrigin: "center bottom" });
+    gsap.set(clipRects, { scaleY: 0, transformOrigin: "center center" });
 
-    gsap.to(strips, {
-      scaleY: 1,
-      duration: 1.2,
-      ease: "power4.out",
-      stagger: {
-        each: 0.015,
-        from: "start"
-      },
+    const tl = gsap.timeline({
       onComplete: () => {
-        callback && callback();
+        setTimeout(() => {
+          gsap.to(clipRects, {
+            scaleY: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            stagger: { each: 0.015, from: "start" }
+          });
+        }, 300);
 
-        gsap.to(strips, {
-          scaleY: 0,
-          duration: 1.2,
-          ease: "power4.inOut",
-          stagger: {
-            each: 0.015,
-            from: "start"
-          },
-          onComplete: () => {
-            wrapper.style.display = "none";
-          }
-        });
+        if (callback) callback();
       }
+    });
+
+    tl.to(clipRects, {
+      scaleY: 1,
+      duration: 0.5,
+      ease: "power2.inOut",
+      stagger: { each: 0.015, from: "start" }
     });
   }
 
-  document.querySelectorAll("a.nav-link").forEach(link => {
+  // Intercept nav links for animation
+  const links = document.querySelectorAll("a.nav-link");
+  links.forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
-      const target = link.getAttribute("href");
+      const href = link.getAttribute("href");
       playRipple(() => {
-        window.location.href = target;
+        window.location.href = href;
       });
     });
   });
+
+  // Initial animation on page load
+  playRipple();
 });
