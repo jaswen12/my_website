@@ -2,19 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const strips = document.querySelectorAll("#transition-strips .strip");
   const wrapper = document.getElementById("transition-strips");
 
+  strips.forEach((strip, i) => {
+    strip.style.left = `${i * 5}%`;
+  });
+
   function playTransition(callback) {
     wrapper.style.display = "block";
+    gsap.set(strips, { xPercent: -100 });
 
-    // Animate strips in
-    gsap.to(strips, {
-      xPercent: 100,
-      duration: 0.6,
-      ease: "power2.inOut",
-      stagger: 0.05,
+    const tl = gsap.timeline({
       onComplete: () => {
         callback && callback();
-
-        // Animate strips out
         gsap.to(strips, {
           xPercent: 200,
           duration: 0.6,
@@ -27,9 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
+
+    tl.to(strips, {
+      xPercent: 100,
+      duration: 0.6,
+      ease: "power2.inOut",
+      stagger: 0.05
+    });
   }
 
-  // Attach transition to navigation links
   document.querySelectorAll("a.nav-link").forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
