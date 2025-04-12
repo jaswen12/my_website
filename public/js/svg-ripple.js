@@ -1,28 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const clipRects = document.querySelectorAll('#ripple-mask-svg clipPath rect');
   const wrapper = document.getElementById("svg-ripple-mask");
+  const clipRects = document.querySelectorAll('#ripple-mask-svg clipPath rect');
 
   function playRipple(callback) {
     wrapper.style.visibility = "visible";
     wrapper.style.opacity = "1";
 
     gsap.set(clipRects, {
-      scaleY: 0,
-      transformOrigin: "center center",
-      y: -50,
-      x: -50,
-      skewX: -10
+      y: -100,
+      opacity: 0
     });
 
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.to(clipRects, {
-          scaleY: 0,
-          y: -50,
-          x: -50,
-          duration: 0.5,
-          ease: "power2.inOut",
-          stagger: { each: 0.012, from: "start" },
+          y: -100,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power1.inOut",
+          stagger: { each: 0.01, from: "start" },
           onComplete: () => {
             wrapper.style.opacity = "0";
             wrapper.style.visibility = "hidden";
@@ -34,12 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     tl.to(clipRects, {
-      scaleY: 1,
       y: 0,
-      x: 0,
-      duration: 0.8,
+      opacity: 1,
+      duration: 0.5,
       ease: "power2.out",
-      stagger: { each: 0.012, from: "start" }
+      stagger: { each: 0.01, from: "start" }
     });
   }
 
@@ -48,8 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const href = link.getAttribute("href");
       playRipple(() => {
+        document.body.classList.remove("fade-in-complete");
         window.location.href = href;
       });
     });
   });
+
+  // Fade in content after page load
+  document.body.classList.add("fade-in-complete");
 });
