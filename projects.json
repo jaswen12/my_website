@@ -2,7 +2,7 @@
     {
       "title": "Smart Grocery Detection",
       "description": "A YOLOv8 model deployed on Raspberry Pi with Hailo-8 for household item recognition.",
-      "link": "https://github.com/yourusername/grocery-detector",
+      "link": "https://github.com/jaswen12/Auto-Labeling-Device",
       "image": "/images/grocery.jpg",
       "iconClass": "fas fa-microchip",
       "tags": ["YOLOv8", "Raspberry Pi", "Hailo-8", "Computer Vision"]
@@ -10,7 +10,7 @@
     {
       "title": "Personal Website",
       "description": "This very website! Built using Node.js, Express, Pug, and CSS from scratch.",
-      "link": "https://github.com/yourusername/personal-website",
+      "link": "https://github.com/jaswen12/my_website",
       "image": "/images/website.jpg",
       "iconClass": "fas fa-code",
       "tags": ["Node.js", "Express", "Pug", "CSS"]
