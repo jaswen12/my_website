@@ -6,15 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.style.visibility = "visible";
     wrapper.style.opacity = "1";
 
-    gsap.set(clipRects, { scaleY: 0, transformOrigin: "center center" });
+    gsap.set(clipRects, {
+      scaleY: 0,
+      transformOrigin: "center center",
+      y: -50,
+      x: -50,
+      skewX: -10
+    });
 
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.to(clipRects, {
           scaleY: 0,
-          duration: 0.4,
+          y: -50,
+          x: -50,
+          duration: 0.5,
           ease: "power2.inOut",
-          stagger: { each: 0.015, from: "start" },
+          stagger: { each: 0.012, from: "start" },
           onComplete: () => {
             wrapper.style.opacity = "0";
             wrapper.style.visibility = "hidden";
@@ -27,9 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tl.to(clipRects, {
       scaleY: 1,
-      duration: 0.5,
-      ease: "power2.inOut",
-      stagger: { each: 0.015, from: "start" }
+      y: 0,
+      x: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: { each: 0.012, from: "start" }
     });
   }
 

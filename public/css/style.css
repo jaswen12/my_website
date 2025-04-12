@@ -367,7 +367,7 @@ footer {
   height: 100vh;
   z-index: 1000;
   pointer-events: none;
-  background: #5c4432;
+  background: #dcd3ba; /* soft wabi-classic beige */
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.2s ease;
