@@ -3,45 +3,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("transition-strips");
 
   function playTransition(callback) {
-    wrapper.style.display = "block"; // ensure visible
+    wrapper.style.display = "block";
 
     const tl = gsap.timeline({
       onComplete: () => {
         callback && callback();
-
-        // Exit animation after short delay
-        setTimeout(() => {
-          gsap.to(strips, {
-            yPercent: -100,
-            duration: 0.5,
-            ease: "power2.inOut",
-            stagger: 0.1,
-            onComplete: () => {
-              wrapper.style.display = "none"; // hide after exit
-            }
-          });
-        }, 300);
+        gsap.to(strips, {
+          xPercent: -100,
+          duration: 0.6,
+          ease: "power2.inOut",
+          stagger: 0.1,
+          onComplete: () => {
+            wrapper.style.display = "none";
+          }
+        });
       }
     });
 
-    tl.set(strips, { yPercent: -100 }); // reset position before start
+    tl.set(strips, { xPercent: -100 });
     tl.to(strips, {
-      yPercent: 0,
-      duration: 0.5,
+      xPercent: 0,
+      duration: 0.6,
       ease: "power2.inOut",
       stagger: 0.1
     });
   }
 
-  // Initial load animation
-  playTransition();
-
-  // Animate on internal link navigation
-  document.querySelectorAll("a.nav-link").forEach(link => {
+  const links = document.querySelectorAll("a.nav-link");
+  links.forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
       const target = link.getAttribute("href");
-
       playTransition(() => {
         window.location.href = target;
       });

@@ -363,22 +363,24 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
+  width: 100%;
   pointer-events: none;
   z-index: 1000;
   overflow: hidden;
+  display: none;
 }
 
 #transition-strips .strip {
   position: absolute;
-  width: 100%;
-  height: 25%;
+  height: 100%;
+  width: 25%;
   background: #5c4432;
-  transform: translateY(-100%);
-  top: 0; /* ensure the first strip has a proper starting point */
+  transform: translateX(-100%);
+  top: 0;
 }
 
-#transition-strips .strip:nth-child(2) { top: 25%; }
-#transition-strips .strip:nth-child(3) { top: 50%; }
-#transition-strips .strip:nth-child(4) { top: 75%; }
+#transition-strips .strip:nth-child(1) { left: 0%; }
+#transition-strips .strip:nth-child(2) { left: 25%; }
+#transition-strips .strip:nth-child(3) { left: 50%; }
+#transition-strips .strip:nth-child(4) { left: 75%; }
