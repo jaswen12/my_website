@@ -1,6 +1,8 @@
 extends layout
 
 block content
-  section.fade-in
-    .resume-container
-      embed(src="/resume.pdf" type="application/pdf")
+    #barba-wrapper
+      .barba-container(data-barba="container" data-barba-namespace="home")
+        section.fade-in
+          .resume-container
+            embed(src="/resume.pdf" type="application/pdf")

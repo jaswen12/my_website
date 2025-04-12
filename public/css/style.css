@@ -356,3 +356,14 @@ footer {
   margin-bottom: 8px;
   display: block;
 }
+
+/* === Perspective === */
+#barba-wrapper {
+  perspective: 1200px;
+  overflow-x: hidden;
+}
+
+.barba-container {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
