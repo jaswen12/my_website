@@ -1,31 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const strips = gsap.utils.toArray("#transition-strips .strip");
   const wrapper = document.getElementById("transition-strips");
+  const strips = Array.from(document.querySelectorAll("#transition-strips .strip"));
 
-  // Slightly overlap strips (assume 5.2% width from CSS)
+  // Get width of the window and calculate exact strip width
+  const totalWidth = window.innerWidth;
+  const stripCount = strips.length;
+  const stripWidth = totalWidth / stripCount;
+
   strips.forEach((strip, i) => {
-    strip.style.left = `${i * 5.1}%`;
+    strip.style.left = `${Math.floor(i * stripWidth)}px`;
+    strip.style.width = `${Math.ceil(stripWidth + 1)}px`; // +1 to ensure overlap
   });
 
   function playTransition(callback) {
     wrapper.style.display = "block";
     gsap.set(strips, { xPercent: -100 });
 
-    const enterTl = gsap.timeline();
-    enterTl.to(strips, {
+    const tl = gsap.timeline();
+    tl.to(strips, {
       xPercent: 0,
-      duration: 0.9,
-      ease: "power2.out",
+      duration: 1.1,
+      ease: "power4.out",
       stagger: {
         each: 0.04,
         from: "start"
       }
     });
 
-    enterTl.to(strips, {
+    tl.to(strips, {
       xPercent: 100,
-      duration: 0.9,
-      ease: "power2.inOut",
+      duration: 1.1,
+      ease: "power4.inOut",
       stagger: {
         each: 0.04,
         from: "start"
