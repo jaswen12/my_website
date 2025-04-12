@@ -26,12 +26,10 @@ html
 
     // CLIP-PATH TRANSITION OVERLAY
     #svg-ripple-mask
-      svg#ripple-mask-svg(viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg")
+      svg(width="100%" height="100%" preserveAspectRatio="none")
         defs
-          clipPath#ripple-clip
-            each val in Array(30)
-              rect.mask-rect(x=val * 3, y=0, width=4, height=100, fill="black")
-        rect(width="100%", height="100%", fill="black", clip-path="url(#ripple-clip)")
+          clipPath#ripple-mask(clipPathUnits="objectBoundingBox")
+            // This will be filled dynamically by JS
 
     // SCRIPTS
     script(src="/js/fadeIn.js")
