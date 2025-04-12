@@ -32,7 +32,9 @@ html
           li: a.nav-link(href="/contact") Contact
 
     main
-      block content
+      #barba-wrapper
+        .barba-container(data-barba="container" data-barba-namespace=namespace)
+          block content
 
     footer
       p © 2025 Jasper

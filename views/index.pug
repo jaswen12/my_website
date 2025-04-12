@@ -1,27 +1,26 @@
 extends layout
 
 block content
-  #barba-wrapper
-    .barba-container(data-barba="container" data-barba-namespace="home")
-      .home-wrapper
-        //- Featured Project Section
-        if featured
-          section.fade-in
-            h2 Featured Projects
-            .featured.project
-              if featured.image
-                img.project-image(src=featured.image, alt=featured.title)
-              h3= featured.title
-              p= featured.description
-              a.button(href=featured.link, target="_blank") View Project
+  - var namespace = "home";
 
-        //- Home Intro Section
-        section.home-intro
-          img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
-          h2 Happy you landed here 🙌 Hi I'm Jasper
-          p This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
+  //- Featured Project Section
+  if featured
+    section.fade-in
+      h2 Featured Projects
+      .featured.project
+        if featured.image
+          img.project-image(src=featured.image, alt=featured.title)
+        h3= featured.title
+        p= featured.description
+        a.button(href=featured.link, target="_blank") View Project
 
-          .home-buttons
-            a.button(href="/projects") View Projects
-            a.button(href="/resume") View Resume
-            a.button(href="/contact") Get in Touch
+  //- Home Intro Section
+  section.home-intro
+    img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
+    h2 Happy you landed here 🙌 Hi I'm Jasper
+    p This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
+
+    .home-buttons
+      a.button(href="/projects") View Projects
+      a.button(href="/resume") View Resume
+      a.button(href="/contact") Get in Touch

@@ -1,26 +1,26 @@
 extends layout
 
 block content
-  #barba-wrapper
-    .barba-container(data-barba="container" data-barba-namespace="projects")
-      section.fade-in
-        h2 My Projects
+  - var namespace = "projects";
 
-        .project-grid
-          each project in projects
-            .project
-              if project.image
-                img.project-image(src=project.image, alt=project.title)
+  section.fade-in
+    h2 My Projects
 
-              .project-content
-                if project.iconClass
-                  i(class=project.iconClass)
-                h3= project.title
-                p= project.description
+    .project-grid
+      each project in projects
+        .project
+          if project.image
+            img.project-image(src=project.image, alt=project.title)
 
-                if project.tags
-                  ul.tags
-                    each tag in project.tags
-                      li= tag
+          .project-content
+            if project.iconClass
+              i(class=project.iconClass)
+            h3= project.title
+            p= project.description
 
-              a(href=project.link, target="_blank") View on GitHub
+            if project.tags
+              ul.tags
+                each tag in project.tags
+                  li= tag
+
+          a(href=project.link, target="_blank") View on GitHub
