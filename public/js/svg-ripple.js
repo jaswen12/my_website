@@ -49,6 +49,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fade in content after page load
   document.body.classList.add("fade-in-complete");
 });
