@@ -1,53 +1,89 @@
+// /public/js/ripple-overlap.js
+
 document.addEventListener("DOMContentLoaded", () => {
-  const wrapper = document.getElementById("svg-ripple-mask");
-  const clipRects = document.querySelectorAll('#ripple-mask-svg clipPath rect');
+  console.log("SVG Ripple Script Loaded");
 
-  function playRipple(callback) {
-    wrapper.style.visibility = "visible";
-    wrapper.style.opacity = "1";
+  const container = document.getElementById("svg-ripple-mask");
+  if (!container) return;
 
-    gsap.set(clipRects, {
-      y: -100,
-      opacity: 0
-    });
+  const cols = 15;
+  const rows = 8;
+  const rippleColor = "#E8DD93"; // Wabi-classic tone
+  const duration = 0.6;
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        gsap.to(clipRects, {
-          y: -100,
-          opacity: 0,
-          duration: 0.4,
-          ease: "power1.inOut",
-          stagger: { each: 0.01, from: "start" },
-          onComplete: () => {
-            wrapper.style.opacity = "0";
-            wrapper.style.visibility = "hidden";
-          }
-        });
+  // Create SVG mask content
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("viewBox", "0 0 100 100");
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.style.width = "100%";
+  svg.style.height = "100%";
+  svg.style.position = "absolute";
+  svg.style.top = 0;
+  svg.style.left = 0;
+  svg.style.zIndex = 1000;
+  svg.style.pointerEvents = "none";
+  svg.style.backgroundColor = rippleColor;
 
-        if (callback) callback();
-      }
-    });
+  const blockWidth = 100 / cols;
+  const blockHeight = 100 / rows;
+  const rects = [];
 
-    tl.to(clipRects, {
-      y: 0,
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.out",
-      stagger: { each: 0.01, from: "start" }
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const rect = document.createElementNS(svgNS, "rect");
+      rect.setAttribute("x", col * blockWidth);
+      rect.setAttribute("y", row * blockHeight);
+      rect.setAttribute("width", blockWidth);
+      rect.setAttribute("height", blockHeight);
+      rect.setAttribute("fill", "black");
+      svg.appendChild(rect);
+      rects.push(rect);
+    }
+  }
+
+  container.appendChild(svg);
+
+  // Entry animation
+  function playIn(callback) {
+    gsap.set(rects, { scale: 0, transformOrigin: "center" });
+    gsap.to(rects, {
+      scale: 1,
+      duration,
+      ease: "power3.out",
+      stagger: {
+        each: 0.01,
+        from: "start",
+        grid: [rows, cols]
+      },
+      onComplete: callback
     });
   }
 
+  // Exit animation
+  function playOut(callback) {
+    gsap.to(rects, {
+      scale: 0,
+      duration,
+      ease: "power3.in",
+      stagger: {
+        each: 0.01,
+        from: "end",
+        grid: [rows, cols]
+      },
+      onComplete: callback
+    });
+  }
+
+  // Intercept nav clicks
   document.querySelectorAll("a.nav-link").forEach(link => {
-    link.addEventListener("click", e => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
       const href = link.getAttribute("href");
-      playRipple(() => {
-        document.body.classList.remove("fade-in-complete");
+
+      playIn(() => {
         window.location.href = href;
       });
     });
   });
-
-  document.body.classList.add("fade-in-complete");
 });
