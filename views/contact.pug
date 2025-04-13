@@ -2,27 +2,27 @@ extends layout
 
 block content
   .social-grid
-    a.social-link(href="http.fade-ups://github.com/jaswen12", target="_blank")
+    a.social-link(href="https://github.com/jaswen12", target="_blank")
       i.fab.fa-github
-      sp.fade-upan GitHub
-    a.social-link(href="http.fade-ups://www.linkedin.com/in/jasp.fade-uper-wen/", target="_blank")
+      span.fade-up GitHub
+    a.social-link(href="https://www.linkedin.com/in/jasper-wen/", target="_blank")
       i.fab.fa-linkedin
-      sp.fade-upan LinkedIn
-    a.social-link(href="http.fade-ups://line.me/ti/p.fade-up/jfI036I-TR", target="_blank")
+      span.fade-up LinkedIn
+    a.social-link(href="https://line.me/ti/p/jfI036I-TR", target="_blank")
       i.fab.fa-line
-      sp.fade-upan Line
+      span.fade-up Line
 
-  section.fade-up.contact-section.fade-up
+  section.fade-up.contact-section
     h2.fade-up Drop a message 📬
     .contact-form.fade-up
       form(method="POST", action="/contact")
         label(for="name") Name
-        inp.fade-uput(typ.fade-upe="text", name="name", id="name", required)
+        input.fade-up(type="text", name="name", id="name", required)
 
         label(for="email") Email
-        inp.fade-uput(typ.fade-upe="email", name="email", id="email", required)
+        input.fade-up(type="email", name="email", id="email", required)
 
         label(for="message") Message
-        textarea(name="message", id="message", rows="6", required)
+        textarea.fade-up(name="message", id="message", rows="6", required)
 
-        button(typ.fade-upe="submit") Send
+        button.fade-up(type="submit") Send
