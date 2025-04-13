@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function playOverlayTransition(callback) {
     overlay.style.visibility = "visible";
     overlay.style.opacity = "1";
-    gsap.set(overlay, { x: "-100%" });
+    gsap.set(overlay, { x: "-100%", y: "-100%" });
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -14,12 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tl.to(overlay, {
       x: "0%",
-      duration: 0.6,
-      ease: "power2.inOut"
+      y: "0%",
+      duration: 0.8,
+      ease: "circ.inOut"
     }).to(overlay, {
       x: "100%",
-      duration: 0.6,
-      ease: "power2.inOut",
+      y: "100%",
+      duration: 0.8,
+      ease: "circ.inOut",
       delay: 0.2,
       onComplete: () => {
         overlay.style.opacity = "0";

@@ -25,16 +25,6 @@ h1, h2, h3 {
   opacity: 0.2;
 }
 
-#bgCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
 /* === LAYOUT === */
 html, body {
   height: 100%;
@@ -365,10 +355,9 @@ footer {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #e8dd93; /* Wabi-inspired beige */
+  background-color: #f5f2e7; /* softer Wabi tone */
   z-index: 1000;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
 }
-
