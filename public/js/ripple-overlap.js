@@ -1,50 +1,46 @@
+
+console.log("SVG Ripple Script Loaded");
+
 document.addEventListener("DOMContentLoaded", () => {
-  const rects = document.querySelectorAll("#ripple-mask-svg rect.mask-rect");
-  const svgMask = document.getElementById("svg-ripple-mask");
+  const container = document.getElementById("svg-ripple-mask");
+  const count = 120;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
 
-  if (!rects.length || !svgMask) {
-    console.warn("Ripple animation elements not found.");
-    return;
-  }
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("width", w);
+  svg.setAttribute("height", h);
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  svg.setAttribute("preserveAspectRatio", "none");
 
-  function playRipple(callback) {
-    svgMask.style.visibility = "visible";
-    svgMask.style.opacity = "1";
+  const mask = document.createElementNS(svgNS, "mask");
+  mask.setAttribute("id", "ripple-mask");
 
-    gsap.set(rects, { scaleY: 0, transformOrigin: "center bottom" });
+  for (let i = 0; i < count; i++) {
+    const rect = document.createElementNS(svgNS, "rect");
+    rect.setAttribute("x", i * (w / count));
+    rect.setAttribute("y", 0);
+    rect.setAttribute("width", w / count);
+    rect.setAttribute("height", h);
+    rect.setAttribute("fill", "white");
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        gsap.to(rects, {
-          scaleY: 0,
-          duration: 0.4,
-          ease: "power1.inOut",
-          stagger: { each: 0.01, from: "start" },
-          onComplete: () => {
-            svgMask.style.opacity = "0";
-            svgMask.style.visibility = "hidden";
-          }
-        });
-
-        if (callback) callback();
-      }
-    });
-
-    tl.to(rects, {
+    gsap.fromTo(rect, {
+      scaleY: 0,
+      transformOrigin: "center center"
+    }, {
       scaleY: 1,
-      duration: 0.5,
-      ease: "power2.out",
-      stagger: { each: 0.01, from: "start" }
+      delay: i * 0.01,
+      duration: 0.6,
+      ease: "power2.out"
     });
+
+    mask.appendChild(rect);
   }
 
-  document.querySelectorAll("a.nav-link").forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const href = link.getAttribute("href");
-      playRipple(() => {
-        window.location.href = href;
-      });
-    });
-  });
+  svg.appendChild(mask);
+  container.innerHTML = ""; // Clear any existing SVG
+  container.appendChild(svg);
+
+  console.log(`${count} rects generated`);
 });
