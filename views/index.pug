@@ -2,23 +2,23 @@ extends layout
 
 block content
 
-    //- Featured Project Section
-    if featured
-      h2 Featured Projects
-      .featured.project
-        if featured.image
-          img.project-image(src=featured.image, alt=featured.title)
-        h3= featured.title
-        p= featured.description
-        a.button(href=featured.link, target="_blank") View Project
+  //- Featured Project Section
+  if featured
+    section.featured.project.fade-up
+      h2.fade-up Featured Projects
+      if featured.image
+        img.project-image(src=featured.image, alt=featured.title)
+      h3= featured.title
+      p.fade-up= featured.description
+      a.button(href=featured.link, target="_blank") View Project
 
-    //- Home Intro Section
-    section.home-intro
-      img.profile(src="/images/me_home.JPG", alt="Jasper's Photo")
-      h2 Happy you landed here 🙌 Hi I'm Jasper
-      p This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
+  //- Home Intro Section
+  section.fade-up.home-intro
+    img.profile.fade-up(src="/images/me_home.JPG", alt="Jasper's Photo")
+    h2.fade-up Happy you landed here 🙌 Hi I'm Jasper
+    p.fade-up This is where I showcase some of my proud works and projects. I am a Computer Engineer graduate from Purdue University and I am passionate in embedded systems and its applications.
 
-      .home-buttons
-        a.button(href="/projects") View Projects
-        a.button(href="/resume") View Resume
-        a.button(href="/contact") Get in Touch
+    .home-buttons
+      a.button.fade-up(href="/projects") View Projects
+      a.button.fade-up(href="/resume") View Resume
+      a.button.fade-up(href="/contact") Get in Touch
