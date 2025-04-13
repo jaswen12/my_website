@@ -10,6 +10,7 @@ html
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css")
 
   body
+    #transition-overlay
     header
       nav
         ul
@@ -24,17 +25,6 @@ html
     footer
       p © 2025 Jasper
 
-    // SVG Ripple Mask
-    #svg-ripple-mask
-      svg#ripple-mask-svg(viewBox="0 0 100 100" preserveAspectRatio="none")
-        defs
-          mask#ripple-mask
-            rect(width="100%" height="100%" fill="white")
-            each val in Array(30)
-              rect.mask-rect(x=val * 3, y=0, width=4, height=100, fill="black")
-        rect(width="100%" height="100%" fill="#E8DD93" mask="url(#ripple-mask)")
-
     // SCRIPTS
-    script(src="/js/fadeIn.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js")
-    script(src="/js/ripple-overlap.js")
+    script(src="/js/overlay-transition.js")
