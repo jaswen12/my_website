@@ -1,87 +1,48 @@
-// /public/js/ripple-overlap.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("SVG Ripple Script Loaded");
+  const rects = document.querySelectorAll("#ripple-mask-svg rect.mask-rect");
+  const svgMask = document.getElementById("svg-ripple-mask");
 
-  const container = document.getElementById("svg-ripple-mask");
-  if (!container) return;
-
-  const cols = 15;
-  const rows = 8;
-  const rippleColor = "#E8DD93"; // Wabi-classic tone
-  const duration = 0.6;
-
-  // Create SVG mask content
-  const svgNS = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(svgNS, "svg");
-  svg.setAttribute("viewBox", "0 0 100 100");
-  svg.setAttribute("preserveAspectRatio", "none");
-  svg.style.width = "100%";
-  svg.style.height = "100%";
-  svg.style.position = "absolute";
-  svg.style.top = 0;
-  svg.style.left = 0;
-  svg.style.zIndex = 1000;
-  svg.style.pointerEvents = "none";
-  svg.style.backgroundColor = rippleColor;
-
-  const blockWidth = 100 / cols;
-  const blockHeight = 100 / rows;
-  const rects = [];
-
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < cols; col++) {
-      const rect = document.createElementNS(svgNS, "rect");
-      rect.setAttribute("x", col * blockWidth);
-      rect.setAttribute("y", row * blockHeight);
-      rect.setAttribute("width", blockWidth);
-      rect.setAttribute("height", blockHeight);
-      rect.setAttribute("fill", "black");
-      svg.appendChild(rect);
-      rects.push(rect);
-    }
+  if (!rects.length || !svgMask) {
+    console.warn("Ripple animation elements not found.");
+    return;
   }
 
-  container.appendChild(svg);
+  function playRipple(callback) {
+    svgMask.style.visibility = "visible";
+    svgMask.style.opacity = "1";
 
-  // Entry animation
-  function playIn(callback) {
-    gsap.set(rects, { scale: 0, transformOrigin: "center" });
-    gsap.to(rects, {
-      scale: 1,
-      duration,
-      ease: "power3.out",
-      stagger: {
-        each: 0.01,
-        from: "start",
-        grid: [rows, cols]
-      },
-      onComplete: callback
+    gsap.set(rects, { scaleY: 0, transformOrigin: "center bottom" });
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        gsap.to(rects, {
+          scaleY: 0,
+          duration: 0.4,
+          ease: "power1.inOut",
+          stagger: { each: 0.01, from: "start" },
+          onComplete: () => {
+            svgMask.style.opacity = "0";
+            svgMask.style.visibility = "hidden";
+          }
+        });
+
+        if (callback) callback();
+      }
+    });
+
+    tl.to(rects, {
+      scaleY: 1,
+      duration: 0.5,
+      ease: "power2.out",
+      stagger: { each: 0.01, from: "start" }
     });
   }
 
-  // Exit animation
-  function playOut(callback) {
-    gsap.to(rects, {
-      scale: 0,
-      duration,
-      ease: "power3.in",
-      stagger: {
-        each: 0.01,
-        from: "end",
-        grid: [rows, cols]
-      },
-      onComplete: callback
-    });
-  }
-
-  // Intercept nav clicks
   document.querySelectorAll("a.nav-link").forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const href = link.getAttribute("href");
-
-      playIn(() => {
+      playRipple(() => {
         window.location.href = href;
       });
     });

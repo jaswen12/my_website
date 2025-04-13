@@ -24,12 +24,15 @@ html
     footer
       p © 2025 Jasper
 
-    // CLIP-PATH TRANSITION OVERLAY
+    // SVG Ripple Mask
     #svg-ripple-mask
-      svg(width="100%" height="100%" preserveAspectRatio="none")
+      svg#ripple-mask-svg(viewBox="0 0 100 100" preserveAspectRatio="none")
         defs
-          clipPath#ripple-mask(clipPathUnits="objectBoundingBox")
-            // This will be filled dynamically by JS
+          mask#ripple-mask
+            rect(width="100%" height="100%" fill="white")
+            each val in Array(30)
+              rect.mask-rect(x=val * 3, y=0, width=4, height=100, fill="black")
+        rect(width="100%" height="100%" fill="#E8DD93" mask="url(#ripple-mask)")
 
     // SCRIPTS
     script(src="/js/fadeIn.js")
